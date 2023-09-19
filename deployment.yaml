@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: padbot-mapper-go-zhw
+spec:
+  selector:
+    matchLabels:
+      app: padbot-mapper-go-zhw
+  template:
+    metadata:
+      labels:
+        app: padbot-mapper-go-zhw
+    spec:
+      restartPolicy: Always
+      hostNetwork: true
+      containers:
+      - name: padbot-mapper-go-zhw
+        image: huajuan6848/padbot_mapper_go:0.0.1
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/kubeedge
+      nodeSelector:
+        kubernetes.io/hostname: nuc-zhw
+      volumes:
+      - name: config-volume
+        configMap:
+          name: device-profile-config-nuc-zhw

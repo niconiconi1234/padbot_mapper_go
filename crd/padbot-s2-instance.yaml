@@ -1,0 +1,83 @@
+apiVersion: devices.kubeedge.io/v1alpha2
+kind: Device
+metadata:
+  name: padbot-s2
+  namespace: default
+  labels:
+    description: padbot-s2
+    model: padbot-model
+spec:
+  deviceModelRef:
+    name: padbot-model
+  protocol:
+    customizedProtocol:
+      protocolName: padbot-protocol
+      configData:
+        padbotBaseURL: http://s2.hua-juan.top:5000
+    common:
+      customizedValues:
+        padbotBaseURL: http://s2.hua-juan.top:5000
+  nodeSelector:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: ""
+            operator: In
+            values:
+              - nuc-zhw
+  propertyVisitors:
+    - propertyName: batteryPercentage
+      customizedProtocol:
+        protocolName: padbot-protocol
+        configData:
+          propertyName: batteryPercentage
+    - propertyName: batteryStatus
+      customizedProtocol:
+        protocolName: padbot-protocol
+        configData:
+          propertyName: batteryStatus
+    - propertyName: actionStatus
+      customizedProtocol:
+        protocolName: padbot-protocol
+        configData:
+          propertyName: actionStatus
+    - propertyName: navigationStatus
+      customizedProtocol:
+        protocolName: padbot-protocol
+        configData:
+          propertyName: navigationStatus
+    - propertyName: robotLocation
+      customizedProtocol:
+        protocolName: padbot-protocol
+        configData:
+          propertyName: robotLocation
+status:
+  twins:
+    - propertyName: batteryPercentage
+      reported:
+        metadata:
+          type: string
+        value: "UNKNOWN"
+    - propertyName: batteryStatus
+      reported:
+        metadata:
+          type: string
+        value: "UNKNOWN"
+    - propertyName: actionStatus
+      reported:
+        metadata:
+          type: string
+        value: "UNKNOWN"
+    - propertyName: navigationStatus
+      reported:
+        metadata:
+          type: string
+        value: "UNKNOWN"
+    - propertyName: robotLocation
+      desired:
+        metadata:
+          type: string
+        value: "UNKNOWN"
+      reported:
+        metadata:
+          type: string
+        value: "UNKNOWN"
