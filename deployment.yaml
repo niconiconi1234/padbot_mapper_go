@@ -12,10 +12,9 @@ spec:
         app: padbot-mapper-go-zhw
     spec:
       restartPolicy: Always
-      hostNetwork: true
       containers:
       - name: padbot-mapper-go-zhw
-        image: huajuan6848/padbot_mapper_go:0.0.1
+        image: huajuan6848/padbot_mapper_go:0.0.2
         volumeMounts:
         - name: config-volume
           mountPath: /opt/kubeedge
@@ -25,3 +24,16 @@ spec:
       - name: config-volume
         configMap:
           name: device-profile-config-nuc-zhw
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: padbot-mapper-go-zhw
+spec:
+  type: NodePort
+  selector:
+    app: padbot-mapper-go-zhw
+  ports:
+  - nodePort: 31215
+    port: 1215
+    targetPort: 1215

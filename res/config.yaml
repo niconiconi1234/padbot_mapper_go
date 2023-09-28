@@ -1,6 +1,6 @@
 mqtt:
-  server: mqtt://127.0.0.1:1883
-  servername: 127.0.0.1
+  server: mqtt://nuc.hua-juan.top:1883
+  servername: nuc.hua-juan.top
   username: ""
   password: ""
   clientId: ""
